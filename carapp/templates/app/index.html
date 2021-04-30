@@ -1,0 +1,124 @@
+{% extends 'app/base_template.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Main row -->
+        <div class="row">
+            <div class="col-md-8" >
+                <div class="box box-solid" >
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="{% static 'app/img/car12.jpg' %}" alt="Share your ride">
+                    <div class="carousel-caption">
+                  <h2>Share your ride</h2>
+      <p>Are you getting sick of traveling alone and spent so much money on gas? Share your ride today,and forget about this problems.</p>
+
+                    </div>
+                  </div>
+                  <div class="item">
+                            <img src="{% static 'app/img/cover.jpg' %}" alt="Find new friends" >
+                    <div class="carousel-caption">
+                     <h2>Find new friends</h2>
+      <p>Finding new friends is easier than ever,nothing makes better friendship than spending few hours casually chatting with some interesting people.</p>
+
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="{% static 'app/img/ride.jpg' %}" alt="Go to new places">
+
+                    <div class="carousel-caption">
+                   <h2>Go to new places</h2>
+      <p>Find some new favourite place to chill out,you have no longer got excuse for not travelling and discovering.</p>
+
+                    </div>
+
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+
+            </div>
+
+
+            <div class="pull-left col-md-4 col-sm-12 col-xs-12">
+                <div class="login-box" >
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <h4 class="login-box-msg">Log in</h4>
+            {% if error_message %}
+                <p class="error alert-danger alert"><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <form action="{% url 'app:login_user' %}?next=/" method="post">
+                {% csrf_token %}
+                <div class="form-group has-feedback">
+                    <input name="username" type="text" class="form-control" placeholder="Username" required>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input name="password" type="password" class="form-control" placeholder="Password" required>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <br>
+                <a href="#" class="pull-right">Forgot password?</a><br>
+                </div>
+
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-offset-8 col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="https://myride.auth0.com/authorize?response_type=code&scope=openid%20profile&client_id=Li1h8im1PjLRuZUl6JlUSYrRodwAabsQ&redirect_uri=http://localhost:8000/api/login/&connection=facebook"
+                        class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Log in using
+                    Facebook</a>
+{#                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using#}
+{#                    Google+</a>#}
+            </div> -->
+            <!-- /.social-auth-links -->
+
+
+
+
+            <a href="{% url 'app:sign_up' %}" class="text-center">Register</a>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+
+            </div>
+        </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock %}

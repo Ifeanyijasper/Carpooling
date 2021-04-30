@@ -1,0 +1,24 @@
+{% extends 'app/dashboard/dashboard_template.html' %}
+{% load humanize %}
+{% block heading %}
+    <section class="content-header">
+        <h1>
+            Dashboard
+            <small>Timeline</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+            <li class="active">&nbsp;Timeline</li>
+        </ol><br><br>
+        <h2>{{ request.user.username }}</h2>
+        <!-- {{ request.user.username }} -->
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section>
+        {% for ride in rides %}   
+            <h2>{{ ride.start }} to {{ ride.dest }}</h2>
+        {% endfor %}
+    </section>
+{% endblock %}

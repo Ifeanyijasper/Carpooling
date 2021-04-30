@@ -1,0 +1,181 @@
+{% extends 'app/user/user_home.html' %}
+{% load widget_tweaks %}
+{% block body%}
+<br><br>
+    <section class="main-content" id="content">
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-4 col-space">
+                    <div class="thumbnail">
+
+                        <div class="caption text-center">
+                            <h2><a href="{% url 'app:view_shared_ride' ride.id%}" >{{ ride.start }} to {{ ride.dest }}</a></h2>
+                            <h4>  <a href="#"><i class="fa fa-cab"></i> Ride : {{ ride.vehicle }}</a></h4>
+                            <!-- <h4>  <a href="{{ ride.vehicle.get_absolute_url }}"><i class="fa fa-cab"></i> Ride : {{ ride.vehicle }}</a></h4> -->
+                            <span> <i class="fa fa-user"></i> Seating : {{ ride.no_pass }} seats</span>
+                            <span><p> <i class="fa fa-calendar"></i> Start time:
+                                {{ ride.date }} at <i class="fa fa-clock-o"></i> {{ ride.start_time }}</p>
+                            </span>
+                            <span> <p> <i class="fa fa-calendar"></i> Estimated arrival time:
+                                {{ ride.date }} at <i class="fa fa-clock-o"></i> {{ ride.arrival_time }}</p>
+                            </span>
+
+                            <span> <p> <i class="fa fa-male"></i><i class="fa fa-female"></i> Gender Preference:
+                                    {{ ride.sex }}</p>
+                            </span>
+
+                                <span> <p> <i class="fa fa-money"></i> Cost:
+                                    {{ ride.cost }} fcfa/km</p>
+                            </span>
+
+                            <h4>  <a href="{{ ride.user.get_absolute_url }}"><i class="glyphicon glyphicon-user"></i> Driver : {{ ride.user.full_name }}</a></h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-8 col-md-8 col-space">
+                    <div class="thumbnail">
+                        <style>
+.card {
+  display: flow-root;
+  /* grid-template-rows: max-content 150px 1fr; */
+  border-radius: 15px;
+  background-color: blueviolet;
+  margin: 0px 15px 0px 15px;
+  padding: 0px 5px 15px 0px;
+}
+ul#question li {
+    display: inline;
+    width: 120px;
+  /* height: 90px; */
+    float: right;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+ul{
+    padding: 0px;
+}
+li{
+    list-style: none;
+}
+.radio {
+  display: none;
+}
+.room{
+    font-size: 3rem;
+    filter: grayscale(0);
+    cursor: pointer;
+    transition: 0.3s;
+}
+#id_question1{
+    font-size: 3rem;
+    filter: grayscale(100);
+    cursor: pointer;
+    transition: 0.3s;
+}
+#id_question1:checked{
+  filter: grayscale(0);
+  font-size: 4rem;
+
+}
+
+                        </style>
+
+                        <h2>Passenger Feedback</h2><br>
+                        <form method="post">
+                            <fieldset class="form-group">
+                            {% csrf_token %}
+                            
+                            <h3>Driver Name: {{ form.driver_name }}</h3><br><br>
+
+                            <div class="card">
+                            <h3>Question1</h3>
+                            {% for radio in form.question1 %}
+                            
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+
+                            <div class="card">
+                            <h3>Question2</h3>
+                            {% for radio in form.question2 %}
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+
+                            <div class="card">
+                            <h3>Question3</h3>
+                            {% for radio in form.question3 %}
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+
+                            <div class="card">
+                            <h3>Question4</h3>
+                            {% for radio in form.question4 %}
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+
+                            <div class="card">
+                            <h3>Question5</h3>
+                            {% for radio in form.question5 %}
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+
+                            <div class="card">
+                            <h3>Question6</h3>
+                            {% for radio in form.question6 %}                            
+                            <ul id="question">
+                                <li>
+                                    <div class="room">
+                                        {{ radio }}
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
+                            </div> <br>
+                                <button type="submit">Submit</button>
+                            </fieldset>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
