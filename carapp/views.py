@@ -10,6 +10,7 @@ from django.views.generic import *
 from django.shortcuts import *
 from django.forms import model_to_dict
 from .forms import *
+import pandas as pd
 from django import forms as fm
 # from notify.signals import notify
 from notifications import notify
@@ -442,13 +443,17 @@ def view_single_ride(request,vehicle_share_id):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
-            form.save()
-            # print('question1:', request.POST.get("question1"))
-            # print('question2:', request.POST.get("question2"))
-            # print('question3:', request.POST.get("question3"))
-            # print('question4:', request.POST.get("question4"))
-            # print('question5:', request.POST.get("question5"))
-            # print('question6:', request.POST.get("question6"))
+            model = pd.read_pickle("./carapp/new_model.pickle")
+            driver = request.POST.get("driver_name")
+            question1 = request.POST.get("question1")
+            question2 = request.POST.get("question2")
+            question3 = request.POST.get("question3")
+            question4 = request.POST.get("question4")
+            question5 = request.POST.get("question5")
+            question6 = request.POST.get("question6")
+            result = model.predict(
+            [[question1, question2, question3, question4, question5, question6]])
+            Rating.objects.update_or_create(driver_name = driver, rating=result[0])
             return redirect('app:view_shared_ride', vehicle_share_id)
 
     context={

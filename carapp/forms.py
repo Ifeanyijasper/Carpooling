@@ -163,6 +163,29 @@ class HorizRadioRenderer(forms.RadioSelect):
             return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
 
 class FeedbackForm(forms.ModelForm):
+    TRUE_FALSE_CHOICES = (
+    (1, 'Yes'),
+    (0, 'No')
+    )
+    TRUE_FALSE_NOT_CHOICES = (
+    (1, 'Yes'),
+    (2, "I don't know"),
+    (0, 'No'),
+    )
+    friendly_CHOICES = (
+    (1, 'Strongly Disagree'),
+    (2, 'Disagree'),
+    (3, 'Neutral'),
+    (4, 'Agree'),
+    (5, 'Strongly Agree')
+    )
+    Likely_CHOICES = (
+    (1, 'Very Unlikey'),
+    (2, 'Unlikely'),
+    (3, 'Neutral'),
+    (4, 'likely'),
+    (5, 'Very Likely')
+    )
     Rating_CHOICES = (
     (1, '🤬'),
     (2, '🙁'),
@@ -170,11 +193,11 @@ class FeedbackForm(forms.ModelForm):
     (4, '😁'),
     (5, '😍')
     )
-    question1 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
-    question2 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
+    question1 = forms.ChoiceField(choices=TRUE_FALSE_CHOICES,widget=forms.RadioSelect)
+    question2 = forms.ChoiceField(choices=TRUE_FALSE_NOT_CHOICES,widget=forms.RadioSelect)
     question3 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
-    question4 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
-    question5 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
+    question4 = forms.ChoiceField(choices=friendly_CHOICES,widget=forms.RadioSelect())
+    question5 = forms.ChoiceField(choices=Likely_CHOICES,widget=forms.RadioSelect())
     question6 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
     
     class Meta:

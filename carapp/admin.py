@@ -13,7 +13,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser, Vehicle, VehicleSharing, Request, Message, Follow, Profile, DriverInfo, Feedback
+from .models import CustomUser, Vehicle, VehicleSharing, Request, Message, Follow, Profile, DriverInfo, Feedback, Rating
 
 csrf_protect_m = method_decorator(csrf_protect)
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
@@ -202,6 +202,7 @@ admin.site.register(Follow,FollowAdmin)
 
 admin.site.register(Profile)
 admin.site.register(Feedback)
+admin.site.register(Rating)
 
 class DriverInfoAdmin(admin.ModelAdmin):
     list_display = ('driver','liscence_no','date_issuance')

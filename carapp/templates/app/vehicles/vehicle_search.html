@@ -127,16 +127,16 @@
         {% else %}
         <div class="page-header"><small class="page-sub-title">No Results</small>try another search or</div>
         <a href="{% url 'app:index' %}#ride-broadcast" class="btn btn-primary btn-lg"><i class="fa fa-bullhorn"></i>&nbsp;Broadcast a Ride Request</a>
- {% endifnotequal %}
+    {% endifnotequal %}
 
         {% for ride in rides %}
         <ul class="timeline">
 
             <!-- timeline time label -->
             <li class="time-label">
-        <span class="bg-red">
-            {{ ride.date|naturalday|capfirst }}
-        </span>
+            <span class="bg-red">
+                {{ ride.date|naturalday|capfirst }}
+            </span>
 
             </li>
             <!-- /.timeline-label -->
@@ -227,6 +227,10 @@
 
 
         {% endfor %}
+
+        <h3>Recommended Driver:</h3>
+
+
     </div>
 
 

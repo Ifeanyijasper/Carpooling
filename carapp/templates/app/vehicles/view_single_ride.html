@@ -44,6 +44,16 @@
   margin: 0px 15px 0px 15px;
   padding: 0px 5px 15px 0px;
 }
+.dffr {
+    display: inline;
+    width: 120px;
+  height: 90px;
+    float: right;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
 ul#question li {
     display: inline;
     width: 120px;
@@ -69,104 +79,104 @@ li{
     cursor: pointer;
     transition: 0.3s;
 }
-#id_question1{
+#id_question3{
     font-size: 3rem;
     filter: grayscale(100);
     cursor: pointer;
     transition: 0.3s;
 }
-#id_question1:checked{
+#id_question3:checked{
   filter: grayscale(0);
   font-size: 4rem;
 
 }
-
-                        </style>
+                </style>
 
                         <h2>Passenger Feedback</h2><br>
                         <form method="post">
                             <fieldset class="form-group">
                             {% csrf_token %}
-                            
-                            <h3>Driver Name: {{ form.driver_name }}</h3><br><br>
+                            <div class="form-group clearfix">
+                                <label for="{{ form.driver_name.id_for_label }}" class="col-md-4 control-label text-right">Driver Name:</label>
+                                <div class="col-md-6">
+                                    {{ form.driver_name }}
+                                </div>
+                            </div><br><br>
 
                             <div class="card">
-                            <h3>Question1</h3>
-                            {% for radio in form.question1 %}
-                            
-                            <ul id="question">
+                            <!-- <h3>Did the driver respect time of meet up?</h3> -->
+                            <div class="form-group clearfix">
+                                <label for="{{ form.driver_name.id_for_label }}" class="control-label text-right">Did the driver respect time of meet up?</label>
+                                <div class="dffr">
+                                    {{ form.question1 }}
+                                </div>
+                                </div>
+                            <!-- </div><br><br>
+                            <div class="room">
+                                {{ form.question1 }}
+                            </div> -->
+                            <!-- <ul id="question">
                                 <li>
                                     <div class="room">
-                                        {{ radio }}
+                                        {{ form.question1 }}
                                     </div>
                                 </li>
-                            </ul>
-                            {% endfor %}
+                            </ul> -->
                             </div> <br>
 
                             <div class="card">
-                            <h3>Question2</h3>
-                            {% for radio in form.question2 %}
+                            <h3>Did the driver respect the road safty rules?</h3>
                             <ul id="question">
                                 <li>
                                     <div class="room">
-                                        {{ radio }}
+                                        {{ form.question2 }}
                                     </div>
                                 </li>
                             </ul>
-                            {% endfor %}
                             </div> <br>
 
                             <div class="card">
-                            <h3>Question3</h3>
-                            {% for radio in form.question3 %}
+                            <h3>Rate the condition of the car?</h3>
                             <ul id="question">
                                 <li>
-                                    <div class="room">
-                                        {{ radio }}
+                                    <div>
+                                        {{ form.question3 }}
                                     </div>
                                 </li>
                             </ul>
-                            {% endfor %}
                             </div> <br>
 
                             <div class="card">
-                            <h3>Question4</h3>
-                            {% for radio in form.question4 %}
+                            <h3>The driver is friendly?</h3>
                             <ul id="question">
                                 <li>
                                     <div class="room">
-                                        {{ radio }}
+                                        {{ form.question4 }}
                                     </div>
                                 </li>
                             </ul>
-                            {% endfor %}
                             </div> <br>
 
                             <div class="card">
-                            <h3>Question5</h3>
-                            {% for radio in form.question5 %}
+                            <h3>How likly are you to recommend the driver to a friend?</h3>
                             <ul id="question">
                                 <li>
                                     <div class="room">
-                                        {{ radio }}
+                                        {{ form.question5 }}
                                     </div>
                                 </li>
                             </ul>
-                            {% endfor %}
                             </div> <br>
 
                             <div class="card">
-                            <h3>Question6</h3>
-                            {% for radio in form.question6 %}                            
+                            <h3>Overall, how would you rate your journey with the driver?</h3>                          
                             <ul id="question">
                                 <li>
                                     <div class="room">
-                                        {{ radio }}
+                                        {{ form.question6 }}
                                     </div>
                                 </li>
                             </ul>
-                            {% endfor %}
                             </div> <br>
                                 <button type="submit">Submit</button>
                             </fieldset>

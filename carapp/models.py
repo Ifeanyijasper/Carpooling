@@ -173,6 +173,29 @@ class Vehicle(models.Model):
         return self.make + " " + self.model + " belonging to " + self.user.username
 
 class Feedback(models.Model):
+    TRUE_FALSE_CHOICES = (
+    (1, 'Yes'),
+    (0, 'No')
+    )
+    TRUE_FALSE_NOT_CHOICES = (
+    (1, 'Yes'),
+    (2, "I don't know"),
+    (0, 'No'),
+    )
+    friendly_CHOICES = (
+    (1, 'Strongly Disagree'),
+    (2, 'Disagree'),
+    (3, 'Neutral'),
+    (4, 'Agree'),
+    (5, 'Strongly Agree')
+    )
+    Likely_CHOICES = (
+    (1, 'Very Unlikey'),
+    (2, 'Unlikely'),
+    (3, 'Neutral'),
+    (4, 'likely'),
+    (5, 'Very Likely')
+    )
     Rating_CHOICES = (
     (1, '🤬'),
     (2, '🙁'),
@@ -181,13 +204,21 @@ class Feedback(models.Model):
     (5, '😍')
     )
     driver_name = models.CharField(max_length=225)
-    question1 = models.IntegerField(choices=Rating_CHOICES)
-    question2 = models.IntegerField(choices=Rating_CHOICES)
+    question1 = models.IntegerField(choices=TRUE_FALSE_CHOICES)
+    question2 = models.IntegerField(choices=TRUE_FALSE_NOT_CHOICES)
     question3 = models.IntegerField(choices=Rating_CHOICES)
-    question4 = models.IntegerField(choices=Rating_CHOICES)
-    question5 = models.IntegerField(choices=Rating_CHOICES)
+    question4 = models.IntegerField(choices=friendly_CHOICES)
+    question5 = models.IntegerField(choices=Likely_CHOICES)
     question6 = models.IntegerField(choices=Rating_CHOICES)
 
+    def __str__(self):
+        return self.driver_name
+
+
+class Rating(models.Model):
+    driver_name = models.CharField(max_length=255)
+    rating = models.IntegerField(blank=False)
+    
     def __str__(self):
         return self.driver_name
 
