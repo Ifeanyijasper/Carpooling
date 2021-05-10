@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/(<pk>[0-9]+)/', views.view_user_id, name='profile'),
 
     path('profile/(<user_id>[a-zA_Z0-9]+)/', views.view_user_name, name='user-profile'),
+    path('app/profile/<user_id>/', views.view_user_name, name='user-profile'),
     path('profile/<user_id>/', views.view_user_name, name='user-profile'),
     path('user/dashboard/', views.dashboard, name='dashboard'),
     path('user/dashboard/messages/', views.messages, name='dashboard_messages'),
@@ -24,6 +25,7 @@ urlpatterns = [
 
     path('user/dashboard/junk/', views.messages_junk, name='dashboard_junk'),
     path('user/dashboard/messages/(<message_id>[0-9]+)/read/', views.messages_read, name='dashboard_messages_read'),
+    path('app/user/dashboard/messages/<message_id>/read/', views.messages_read, name='dashboard_messages_read'),
     path('user/dashboard/sent/(<message_id>[0-9]+)/read/', views.messages_read_sent, name='dashboard_messages_read_sent'),
 
     path('user/dashboard/messages/(<message_id>[0-9]+)/reply/', views.messages_reply, name='dashboard_messages_reply'),
@@ -62,7 +64,7 @@ urlpatterns = [
 
     path('user/(<user_id>[0-9]+)/request/(<ride_id>[0-9]+)', views.request_ride, name='request_ride'),
 
-    path('app/sharing/<vehicle_share_id>/view/', views.view_single_ride, name='view_shared_ride'),
+    path('app/sharing/<int:vehicle_share_id>/view/', views.view_single_ride, name='view_shared_ride'),
 
     path('app/ride/<ride_id>/view/', views.view_single_vehicle, name='view_shared_vehicle'),
 
@@ -84,6 +86,7 @@ urlpatterns = [
     path('notification/read/', views.mark_as_read, name='mark_as_read'),
 
     path('user/messages/unread/', views.unread_messages, name='unread_messages'),
+    path('app/user/messages/unread/', views.unread_messages, name='unread_messages'),
     path('user/messages/(<message_id>[0-9]+)/delete/', views.delete_message, name='delete_message'),
 
     path('user/preferences/', views.preferences, name='preferences'),

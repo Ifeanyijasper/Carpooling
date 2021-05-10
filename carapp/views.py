@@ -172,12 +172,12 @@ def contact(request):
         ''' % (name, email, website, message)
 
         send_mail('Contact Form Message From My Ride', send_message, 'ifeanyijasper@outlook.com', ['ifeanyijasper@outlook.com'])
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return render(request, 'app/contact_loggedin.html',{'done':True})
         else:
             return render(request, 'app/contact.html',{'done':True})
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return render(request, 'app/contact_loggedin.html')
     else:
         return render(request, 'app/contact.html')
@@ -333,6 +333,7 @@ def vehicle_search(request, user_id):
             djqscsv.write_csv(qs, csv_file)
 
     allrides = VehicleSharing.objects.filter(ended=False).order_by('date').reverse()
+    drivers = Rating.objects.all()
 
     if request.method == 'POST':
         size = 0
@@ -397,6 +398,7 @@ def vehicle_search(request, user_id):
             'rides': rides,
             'allrides':allrides,
             'size':size,
+            'drivers':drivers,
         }
 
         return render(request, 'app/vehicles/vehicle_search.html', context)
@@ -407,6 +409,7 @@ def vehicle_search(request, user_id):
         context = {
             'user': user,
             'allrides': allrides,
+            'drivers':drivers,
         }
 
         return render(request, 'app/vehicles/vehicle_search.html', context)
@@ -658,7 +661,7 @@ def mark_as_read(request):
 
 @login_required
 def unread_messages(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         data = {
             'unread_count':0,
             'unread_list':[]

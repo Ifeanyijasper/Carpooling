@@ -228,8 +228,14 @@
 
         {% endfor %}
 
-        <h3>Recommended Driver:</h3>
-
+        <h3>Recommended Driver with shared Ride:</h3>
+        {% for ride in rides %}
+            {% for driver in drivers %}
+                {% if ride.vehicle.user.username  == driver.driver_name %}
+                <h4><a href="{{ ride.vehicle.user.get_absolute_url }}">{{driver.driver_name}}</a><br>Rating:{{ driver.rating}}</h4>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
 
     </div>
 

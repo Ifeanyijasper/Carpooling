@@ -38,9 +38,11 @@
                                     <h3 class="visible-lg"><a class="link-black" href="{{ user_request.get_absolute_url }}">{{ user_request.pick }}&nbsp;&rightarrow;&nbsp;{{ user_request.dest  }}</a></h3>
                                     <h4 class="visible-xs visible-sm visible-md"><a class="link-muted" href="{{ user_request.get_absolute_url }}">{{ user_request.pick }}&nbsp;&rightarrow;&nbsp;{{ user_request.dest  }}</a></h4>
 
-
+                                    {% if user_request.status == 'approved' %}
                                     <h4><a href="{{ user_request.ride.get_absolute_url }}">Route: {{ user_request.ride }}</a></h4>
-                                    
+                                    {% else %}
+                                    <h4><a href="#">Route: {{ user_request.ride }}</a></h4>
+                                    {% endif %}
                                     <!-- <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal" id="trigger-btn">Start</button> -->
                                     {% if user_request.status == 'approved' %}
                                         <p class="ride-people">

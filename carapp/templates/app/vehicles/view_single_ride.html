@@ -79,21 +79,14 @@ li{
     cursor: pointer;
     transition: 0.3s;
 }
-#id_question3{
-    font-size: 3rem;
-    filter: grayscale(100);
-    cursor: pointer;
-    transition: 0.3s;
-}
-#id_question3:checked{
+.room:checked{
   filter: grayscale(0);
   font-size: 4rem;
 
 }
                 </style>
-
                         <h2>Passenger Feedback</h2><br>
-                        <form method="post">
+                        <form method="post" id="formad">
                             <fieldset class="form-group">
                             {% csrf_token %}
                             <div class="form-group clearfix">
@@ -111,17 +104,6 @@ li{
                                     {{ form.question1 }}
                                 </div>
                                 </div>
-                            <!-- </div><br><br>
-                            <div class="room">
-                                {{ form.question1 }}
-                            </div> -->
-                            <!-- <ul id="question">
-                                <li>
-                                    <div class="room">
-                                        {{ form.question1 }}
-                                    </div>
-                                </li>
-                            </ul> -->
                             </div> <br>
 
                             <div class="card">
@@ -178,9 +160,10 @@ li{
                                 </li>
                             </ul>
                             </div> <br>
-                                <button type="submit">Submit</button>
+                                <button><input type="submit" name="Submit" ></button>
                             </fieldset>
                             </form>
+                        </div>
                     </div>
                 </div>
             </div>
