@@ -217,7 +217,7 @@ class Feedback(models.Model):
 
 class Rating(models.Model):
     driver_name = models.CharField(max_length=255)
-    rating = models.IntegerField(blank=False)
+    rating = models.FloatField(blank=False)
     
     def __str__(self):
         return self.driver_name

@@ -328,10 +328,6 @@ def vehicle_search(request, user_id):
         redirect('app:sign_up')
     user = get_object_or_404(CustomUser, pk=user_id)
 
-    qs =  Feedback.objects.all()
-    with open('.././database.csv', 'wb') as csv_file:
-            djqscsv.write_csv(qs, csv_file)
-
     allrides = VehicleSharing.objects.filter(ended=False).order_by('date').reverse()
     drivers = Rating.objects.all()
 
@@ -456,7 +452,9 @@ def view_single_ride(request,vehicle_share_id):
             question6 = request.POST.get("question6")
             result = model.predict(
             [[question1, question2, question3, question4, question5, question6]])
-            Rating.objects.update_or_create(driver_name = driver, rating=result[0])
+            rating_obj = Rating.objects.filter(driver_name = driver).first()
+            rate = (rating_obj.rating + result[0])/2
+            Rating.objects.update_or_create(driver_name = driver, defaults={"rating":rate})
             return redirect('app:view_shared_ride', vehicle_share_id)
 
     context={
