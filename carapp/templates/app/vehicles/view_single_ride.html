@@ -35,34 +35,81 @@
                 </div>
                 <div class="col-sm-8 col-lg-8 col-md-8 col-space">
                     <div class="thumbnail">
-                        <style>
-.card {
-  display: flow-root;
-  /* grid-template-rows: max-content 150px 1fr; */
-  border-radius: 15px;
-  background-color: blueviolet;
-  margin: 0px 15px 0px 15px;
-  padding: 0px 5px 15px 0px;
+<style>
+input[type=text] {
+width: 60%;
+padding: 8px;
+border: 3px solid #2296f3;
+border-radius: 14px;
 }
-.dffr {
-    display: inline;
-    width: 120px;
-  height: 90px;
-    float: right;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  user-select: none;
+.clabel {
+padding: 2px 21px 0px 0;
+display: inline-block;
+font-size: large;
+}
+.questionheader{
+padding: 2px 21px 0px 0;
+margin-left: 23px;
+font-size: 25px;
+}
+.feedtitle{
+    font-size: 45px;
+    text-align: center;
+}
+.card {
+display: flow-root;
+grid-template-rows: max-content 150px 1fr;
+border-radius: 15px;
+background-color: #2296f3;
+margin: 0px 15px 0px 15px;
+padding: 0px 5px 15px 0px;
+}
+.button {
+  background-color: #2296f3; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 300px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+ul#question1 li {
+margin: 0 50px 0 100px;
+display:inline-block;
+font-size: 28px;
 }
 ul#question li {
-    display: inline;
-    width: 120px;
-  /* height: 90px; */
-    float: right;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  user-select: none;
+margin: 0 50px 0 50px;
+display:inline-block;
+font-size: 28px;
+}
+ul#question2 li {
+margin: 0 20px 0 40px;
+display:inline-block;
+}
+ul#question3 li {
+margin: 0 10px 0 10px;
+display:inline-block;
+font-size: 24px;
+}
+ul#question4 li {
+margin: 0 5px 0 7px;
+display:inline-block;
+font-size: 22px;
 }
 ul{
     padding: 0px;
@@ -70,47 +117,46 @@ ul{
 li{
     list-style: none;
 }
-.radio {
-  display: none;
-}
 .room{
-    font-size: 3rem;
-    filter: grayscale(0);
-    cursor: pointer;
-    transition: 0.3s;
+font-size: 3rem;
+cursor: pointer;
+transition: 0.3s;
 }
-.room:checked{
-  filter: grayscale(0);
-  font-size: 4rem;
 
+input[type=radio]:checked{
+display: none;
 }
+
 </style>
-                        <h2>Passenger Feedback</h2><br>
-                        <form method="post" id="formad">
-                            <fieldset class="form-group">
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+                        <h2 class="feedtitle">Passenger Feedback</h2><br>
+                        <form method="post">
                             {% csrf_token %}
-                            <div class="form-group clearfix">
-                                <label for="{{ form.driver_name.id_for_label }}" class="col-md-4 control-label text-right">Driver Name:</label>
-                                <div class="col-md-6">
-                                    {{ form.driver_name }}
-                                </div>
-                            </div><br><br>
-
-                            <div class="card">
-                            <!-- <h3>Did the driver respect time of meet up?</h3> -->
-                            <div class="form-group clearfix">
-                                <label for="{{ form.driver_name.id_for_label }}" class="control-label text-right">Did the driver respect time of meet up?</label>
-                                <div class="dffr">
-                                    {{ form.question1 }}
-                                </div>
-                                </div>
+                            <div>
+                                <label class="questionheader">{{ form.driver_name.label_tag }}</label>
+                                {{ form.driver_name }}
                             </div> <br>
 
                             <div class="card">
-                            <h3>Did the driver respect the road safty rules?</h3>
+                                <h3 class="questionheader">Did the driver respect time of meet up?</h3>
+                            <ul id="question1">
+                                <li>
+                                    <div>
+                                        {{ form.question1 }}
+                                    </div>
+                                </li>
+                            </ul>
+                            </div> <br>
+
+                            <div class="card">
+                            <h3 class="questionheader">Did the driver respect the road safty rules?</h3>
                             <ul id="question">
                                 <li>
-                                    <div class="room">
+                                    <div>
                                         {{ form.question2 }}
                                     </div>
                                 </li>
@@ -118,10 +164,10 @@ li{
                             </div> <br>
 
                             <div class="card">
-                            <h3>Rate the condition of the car?</h3>
-                            <ul id="question">
+                            <h3 class="questionheader">Rate the condition of the car?</h3>
+                            <ul id="question2">
                                 <li>
-                                    <div>
+                                    <div class="room">
                                         {{ form.question3 }}
                                     </div>
                                 </li>
@@ -129,10 +175,10 @@ li{
                             </div> <br>
 
                             <div class="card">
-                            <h3>The driver is friendly?</h3>
-                            <ul id="question">
+                            <h3 class="questionheader">The driver is friendly?</h3>
+                            <ul id="question4">
                                 <li>
-                                    <div class="room">
+                                    <div>
                                         {{ form.question4 }}
                                     </div>
                                 </li>
@@ -140,10 +186,10 @@ li{
                             </div> <br>
 
                             <div class="card">
-                            <h3>How likly are you to recommend the driver to a friend?</h3>
-                            <ul id="question">
+                            <h3 class="questionheader">How likely are you to recommend the driver to a friend?</h3>
+                            <ul id="question3">
                                 <li>
-                                    <div class="room">
+                                    <div>
                                         {{ form.question5 }}
                                     </div>
                                 </li>
@@ -151,8 +197,8 @@ li{
                             </div> <br>
 
                             <div class="card">
-                            <h3>Overall, how would you rate your journey with the driver?</h3>                          
-                            <ul id="question">
+                            <h3 class="questionheader">Overall, how would you rate your journey with the driver?</h3>                          
+                            <ul id="question2">
                                 <li>
                                     <div class="room">
                                         {{ form.question6 }}
@@ -160,8 +206,7 @@ li{
                                 </li>
                             </ul>
                             </div> <br>
-                                <button><input type="submit" name="Submit" ></button>
-                            </fieldset>
+                            <button type="submit" id="submitbutton" class="button button2">Submit</button>
                             </form>
                         </div>
                     </div>

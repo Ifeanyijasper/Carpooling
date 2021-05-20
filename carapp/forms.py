@@ -193,8 +193,8 @@ class FeedbackForm(forms.ModelForm):
     (4, '😁'),
     (5, '😍')
     )
-    question1 = forms.ChoiceField(choices=TRUE_FALSE_CHOICES,widget=forms.RadioSelect)
-    question2 = forms.ChoiceField(choices=TRUE_FALSE_NOT_CHOICES,widget=forms.RadioSelect)
+    question1 = forms.ChoiceField(choices=TRUE_FALSE_CHOICES,widget=forms.RadioSelect())
+    question2 = forms.ChoiceField(choices=TRUE_FALSE_NOT_CHOICES,widget=forms.RadioSelect())
     question3 = forms.ChoiceField(choices=Rating_CHOICES,widget=forms.RadioSelect())
     question4 = forms.ChoiceField(choices=friendly_CHOICES,widget=forms.RadioSelect())
     question5 = forms.ChoiceField(choices=Likely_CHOICES,widget=forms.RadioSelect())
