@@ -83,6 +83,7 @@
         <!-- To the right -->
         <div class="pull-right hidden-xs">
             <a href="{% url 'app:about' %}">About</a> |
+            <a href="{% url 'app:contact' %}">Contact</a> |
             {% if not request.user.is_authenticated %}
             <a href="{% url 'app:login' %}">Login</a> |
             <a href="{% url 'app:sign_up' %}">Sign Up</a> |

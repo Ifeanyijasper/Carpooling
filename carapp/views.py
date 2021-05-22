@@ -153,24 +153,25 @@ def about(request):
     else:
         return render(request, 'app/about.html')
 
-
+def about_goride(request):
+    return render(request, 'app/about_goride.html')
 
 
 def contact(request):
     if request.method == 'POST':
         name = request.POST['username']
         email = request.POST['email']
-        website = request.POST['website']
+        Subject = request.POST['website']
         message = request.POST['message']
 
         send_message = '''
         Name : %s
         Email : %s
-        Website : %s
+        Subject : %s
         Message : %s
 
-        ''' % (name, email, website, message)
-
+        ''' % (name, email, Subject, message)
+        
         send_mail('Contact Form Message From Go Ride', send_message, 'ifeanyijasper@outlook.com', ['ifeanyijasper@outlook.com'])
         if request.user.is_authenticated:
             return render(request, 'app/contact_loggedin.html',{'done':True})
