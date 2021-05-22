@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#69!0i=u0_!5q$j$l%4mzehym*q!dzjpp9$jino-upy0yko=a^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://go-rider.herokuapp.com']
 
 
 # Application definition
