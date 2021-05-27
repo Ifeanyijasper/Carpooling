@@ -203,6 +203,7 @@ class Feedback(models.Model):
     (4, '😁'),
     (5, '😍')
     )
+    # username= models.CharField()
     driver_name = models.CharField(max_length=225)
     question1 = models.IntegerField(choices=TRUE_FALSE_CHOICES)
     question2 = models.IntegerField(choices=TRUE_FALSE_NOT_CHOICES)

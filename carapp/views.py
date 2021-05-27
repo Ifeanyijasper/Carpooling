@@ -414,6 +414,7 @@ def vehicle_search(request, user_id):
 
 @login_required
 def request_ride(request,user_id, ride_id):
+    # print(request.user.username)
     user = get_object_or_404(CustomUser, pk=user_id)
     ride = get_object_or_404(VehicleSharing, pk=ride_id)
 
@@ -454,7 +455,12 @@ def view_single_ride(request,vehicle_share_id):
             result = model.predict(
             [[question1, question2, question3, question4, question5, question6]])
             rating_obj = Rating.objects.filter(driver_name = driver).first()
-            rate = (rating_obj.rating + result[0])/2
+            
+            try:
+                rate = (rating_obj.rating + result[0])/2
+            except:
+                rate = result[0]
+
             Rating.objects.update_or_create(driver_name = driver, defaults={"rating":rate})
             return redirect('app:view_shared_ride', vehicle_share_id)
 
