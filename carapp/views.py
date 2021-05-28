@@ -414,7 +414,6 @@ def vehicle_search(request, user_id):
 
 @login_required
 def request_ride(request,user_id, ride_id):
-    # print(request.user.username)
     user = get_object_or_404(CustomUser, pk=user_id)
     ride = get_object_or_404(VehicleSharing, pk=ride_id)
 
@@ -438,33 +437,40 @@ def request_ride(request,user_id, ride_id):
             return redirect('app:requests_user_view',user_id )
 
 @login_required
-def view_single_ride(request,vehicle_share_id):
+def view_single_ride(request,vehicle_share_id):    
+    ride = get_object_or_404(VehicleSharing, pk=vehicle_share_id)
+    driver_name   = str(ride.vehicle).split(" ")[4]
+    passenger = request.user
+    date = ride.date
+    fills = Feedback.objects.filter(driver_name = driver_name,passenger=passenger,date=date)
+    fill = len(fills)
     form = FeedbackForm()
     ride = get_object_or_404(VehicleSharing, pk=vehicle_share_id)
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
             model = pd.read_pickle("./carapp/new_model.pickle")
-            driver = request.POST.get("driver_name")
             question1 = request.POST.get("question1")
             question2 = request.POST.get("question2")
             question3 = request.POST.get("question3")
             question4 = request.POST.get("question4")
             question5 = request.POST.get("question5")
             question6 = request.POST.get("question6")
+
+            Feedback.objects.create(driver_name = driver_name, passenger=passenger, date=date, question1=question1,question2=question2,question3=question3, question4=question4, question5=question5, question6=question6)            
             result = model.predict(
             [[question1, question2, question3, question4, question5, question6]])
-            rating_obj = Rating.objects.filter(driver_name = driver).first()
+            rating_obj = Rating.objects.filter(driver_name = driver_name).first()
             
             try:
                 rate = (rating_obj.rating + result[0])/2
             except:
                 rate = result[0]
-
-            Rating.objects.update_or_create(driver_name = driver, defaults={"rating":rate})
+            Rating.objects.update_or_create(driver_name = driver_name, defaults={"rating":rate})
             return redirect('app:view_shared_ride', vehicle_share_id)
 
     context={
+        'fill':fill,
         'form': form,
         'ride': ride
         }

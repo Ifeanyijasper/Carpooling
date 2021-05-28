@@ -34,7 +34,13 @@
                     </div>
                 </div>
                 <div class="col-sm-8 col-lg-8 col-md-8 col-space">
+                    {% if fill %}
+                        <div class="thumbnail">
+                            <h2>Thanks For your Feedback</h2>
+                        </div>
+                    {% else%}
                     <div class="thumbnail">
+
 <style>
 input[type=text] {
 width: 60%;
@@ -210,6 +216,7 @@ display: none;
                             <button type="submit" id="submitbutton" class="button button2">Submit</button>
                             </form>
                         </div>
+                {% endif %}
                     </div>
                 </div>
             </div>

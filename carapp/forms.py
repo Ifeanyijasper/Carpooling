@@ -202,4 +202,4 @@ class FeedbackForm(forms.ModelForm):
     
     class Meta:
         model = Feedback
-        fields = ['driver_name', 'question1', 'question2','question3','question4','question5','question6']
+        fields = ['question1', 'question2','question3','question4','question5','question6']
